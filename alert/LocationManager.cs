@@ -13,6 +13,7 @@ namespace alert
 {
     class CLocation
     {
+
     }
         
 }

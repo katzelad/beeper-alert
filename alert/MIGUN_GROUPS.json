@@ -1,7 +1,4 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
-<HTML><HEAD>
-<META content="text/html; charset=utf-8" http-equiv=Content-Type></HEAD>
-<BODY><PRE>{
+﻿{
  "displayFieldName": "MIGUN_GROUP_NAME",
  "fieldAliases": {
   "MIGUN_GROUP_NAME": "MIGUN_GROUP_NAME"
@@ -178318,4 +178315,4 @@
    }
   }
  ]
-}</PRE></BODY></HTML>
+}
