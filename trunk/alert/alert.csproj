@@ -61,17 +61,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alert.cs" />
     <Compile Include="Alert_Form.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Alert_Form.Designer.cs">
       <DependentUpon>Alert_Form.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="Bepper_Alert.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Bepper_Alert.Designer.cs">
+      <DependentUpon>Bepper_Alert.cs</DependentUpon>
     </Compile>
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
@@ -98,8 +99,8 @@
     <EmbeddedResource Include="Alert_Form.resx">
       <DependentUpon>Alert_Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="Bepper_Alert.resx">
+      <DependentUpon>Bepper_Alert.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>

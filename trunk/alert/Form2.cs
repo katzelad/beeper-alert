@@ -15,7 +15,9 @@ namespace alert
     {
         public Form2()
         {
-            InitializeComponent();
+             InitializeComponent();
+
+            GetLocationEvent();
         }
 
 
