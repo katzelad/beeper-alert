@@ -15,6 +15,7 @@ namespace alert
         public Form1()
         {
             InitializeComponent();
+
         }
     }
 }
