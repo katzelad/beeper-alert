@@ -91,11 +91,11 @@ namespace alert
             data = (RootObject)new DataContractJsonSerializer(typeof(RootObject)).ReadObject(stream);
 
             SpreadsheetDocument table = SpreadsheetDocument.Open(tableFileName, false);
-            Func<Row, int, string> getCell = (row, i) => row.Elements<Cell>().ElementAt<Cell>(i).CellValue.Text;
+            Func<Row, int, string> getCell = (row, col) => row.Elements<Cell>().ElementAt<Cell>(col).CellValue.Text;
             zoneData = table.WorkbookPart.WorksheetParts.First().Worksheet.Elements<SheetData>().First().Elements<Row>().Skip(1)
                 .ToDictionary(
-                    row => getCell(row, 1),
-                    row => new Tuple<string, int>(getCell(row, 2), int.Parse(getCell(row, 9)))
+                    row => getCell(row, 4),
+                    row => new Tuple<string, int>(getCell(row, 5), int.Parse(getCell(row, 10)))
                 );
             table.Close();
 
