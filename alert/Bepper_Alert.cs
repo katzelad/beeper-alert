@@ -21,7 +21,6 @@ namespace alert
             this.ShowInTaskbar = false;
 
             ContextMenu notifyMenu = new System.Windows.Forms.ContextMenu();
-            notifyMenu.MenuItems.Add("sdgsdg", new EventHandler(notifyMenu_sdfsdf));
             notifyMenu.MenuItems.Add("הגדרות", new EventHandler(notifyMenu_Settings));
             notifyMenu.MenuItems.Add("יציאה", new EventHandler(notifyMenu_exit));
             notifyIcon1.ContextMenu = notifyMenu;
@@ -31,12 +30,13 @@ namespace alert
 
         }
 
-
+        //Test
         private void notifyMenu_sdfsdf(object sender, EventArgs e)
         {
             Alert_Form.arrAlert.Add(new Alert("ניב 150", 5));
             Alert_Form.arrAlert.Add(new Alert("dfkljdsf 150", 10));
         }
+
         private void notifyMenu_exit(object sender, EventArgs e)
         {
             Application.Exit();
@@ -58,6 +58,7 @@ namespace alert
         void OnPagerMessageReceived(BMGR.Daemon.PagerMessage nan)
         {
             label1.Text = nan.AddressSlot;
+            //new alert
             
         }
 
