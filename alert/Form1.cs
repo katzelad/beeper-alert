@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Device.Location;
 using System.Drawing;
+using System.IO.Ports;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,18 +22,14 @@ namespace alert
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var watcher = new GeoCoordinateWatcher();
+            BMGR.Daemon.SerialBeeper a = new BMGR.Daemon.SerialBeeper("COM5", 4800, Parity.None, 8, StopBits.One, 1);
+            a.Open();
+            a.OnPagerMessageReceived += new BMGR.Daemon.SerialBeeper.PagerMessageReceived(OnPagerMessageReceived);
+        }
 
-            watcher.TryStart(false, TimeSpan.FromMilliseconds(5000));
-
-            var coord = watcher.Position.Location;
-
-
-            if (coord.IsUnknown != true)
-
-                label1.Text = coord.Longitude + "," + coord.Latitude;
-            else
-               label1.Text = "Can't locate";
+        void OnPagerMessageReceived(BMGR.Daemon.PagerMessage nan)
+        {
+            label1.Text = nan.Number + ":" + nan.Text + ":" + nan.Status;
         }
     }
 }
