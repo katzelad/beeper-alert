@@ -16,22 +16,22 @@ namespace alert
         private List<string> areas = new List<string>();
         private string[] selectedAreas;
         private string comPort;
-        //public static Settings settings = Settings.Instance;
+        public static Settings settings = Settings.Instance;
 
         public Settings_Form()
         {
-            //InitializeComponent();
-            //areas = JSONdata.getGroupNames();
-            //chkAreaList.DataSource = areas;
-            //settings.loadSettings();
+            InitializeComponent();
+            areas = JSONdata.getGroupNames();
+            chkAreaList.DataSource = areas;
+            settings.loadSettings();
 
-            //foreach (string strArea in settings.areas)
-            //{
-            //    chkAreaList.SetItemChecked(chkAreaList.FindStringExact(strArea), true);
-            //}
- 
+            foreach (string strArea in settings.areas)
+            {
+                chkAreaList.SetItemChecked(chkAreaList.FindStringExact(strArea), true);
+            }
+
         }
-        
+
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -39,11 +39,11 @@ namespace alert
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            //selectedAreas = chkAreaList.CheckedItems.OfType<string>().ToArray();
-            //comPort = txtCOM.Text;
-            //settings.areas = selectedAreas;
-            //settings.port = comPort;
-            //settings.saveSettings();
+            selectedAreas = chkAreaList.CheckedItems.OfType<string>().ToArray();
+            comPort = txtCOM.Text;
+            settings.areas = selectedAreas;
+            settings.port = comPort;
+            settings.saveSettings();
         }
     }
 }
