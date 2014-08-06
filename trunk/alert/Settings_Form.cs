@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -25,10 +26,13 @@ namespace alert
             chkAreaList.DataSource = areas;
             //settings.loadSettings();
 
-            //foreach (string strArea in settings.areas)
-            //{
-            //    chkAreaList.SetItemChecked(chkAreaList.FindStringExact(strArea), true);
-            //}
+            if (settings.areas.Length != null)
+            {
+                foreach (string strArea in settings.areas)
+                {
+                    chkAreaList.SetItemChecked(chkAreaList.FindStringExact(strArea), true);
+                }
+            }
 
         }
 
@@ -43,6 +47,21 @@ namespace alert
             comPort = txtCOM.Text;
             settings.areas = selectedAreas;
             settings.port = comPort;
+
+            //create selected areas list 
+            for (int i = 0; i < settings.areas.Length; i++)
+            {
+                //extract id from area
+                int areaID = Int32.Parse(Regex.Match(settings.areas[i], @"\d+").Value);
+
+                //get alert by id
+                //Alert newAlert = getAlertById(areaID);
+
+                //add to alerts list in settings
+                //settings.alerts[i + 1].Name = newAlert.Name;
+                //settings.alerts[i + 1].ID = newAlert.ID;
+                //settings.alerts[i + 1].TTL = newAlert.TTL;
+            }
             //settings.saveSettings();
         }
     }
