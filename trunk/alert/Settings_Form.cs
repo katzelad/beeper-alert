@@ -62,6 +62,7 @@ namespace alert
                 settings.alerts.Add(newAlert);
             }
             //settings.saveSettings();
+            this.Close();
         }
     }
 }
