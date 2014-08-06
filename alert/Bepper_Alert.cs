@@ -56,7 +56,7 @@ namespace alert
 
         private void notifyMenu_dummy(object sender, EventArgs e)
         {
-            OnPagerMessageReceivedDUMMY("fk77kk");
+            OnPagerMessageReceivedDUMMY("fk311kk");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -68,7 +68,6 @@ namespace alert
 
         void OnPagerMessageReceived(BMGR.Daemon.PagerMessage nan)
         {
-            //label1.Text = nan.Text;
             
             //extract id from area
             int areaID = Int32.Parse(Regex.Match(nan.Text, @"\d+").Value);
@@ -91,7 +90,6 @@ namespace alert
 
         void OnPagerMessageReceivedDUMMY(string nan)
         {
-            //label1.Text = nan.Text;
 
             //extract id from area
             int areaID = Int32.Parse(Regex.Match(nan, @"\d+").Value);
