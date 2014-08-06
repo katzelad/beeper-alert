@@ -24,6 +24,7 @@ namespace alert
         {
             listBox1.DataSource = arrAlert;
             listBox1.DisplayMember = "Name";
+            new CLocation().GetLocationEvent();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
