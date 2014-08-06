@@ -12,7 +12,7 @@ namespace alert
 {
     public partial class Settings_Form : Form
     {
-        private JSONParser JSONdata = new JSONParser("../../MIGUN_GROUPS.json", "../../בסיס נתונים התרעה.xlsx");
+        private JSONParser JSONdata = new JSONParser("../../MIGUN_GROUPS.json", "../../בסיס נתונים התרעה.csv");
         private string[] areas;
         private string[] selectedAreas;
         private string comPort;
@@ -23,12 +23,12 @@ namespace alert
             InitializeComponent();
             areas = JSONdata.getGroupNames();
             chkAreaList.DataSource = areas;
-            settings.loadSettings();
+            //settings.loadSettings();
 
-            foreach (string strArea in settings.areas)
-            {
-                chkAreaList.SetItemChecked(chkAreaList.FindStringExact(strArea), true);
-            }
+            //foreach (string strArea in settings.areas)
+            //{
+            //    chkAreaList.SetItemChecked(chkAreaList.FindStringExact(strArea), true);
+            //}
 
         }
 
@@ -43,7 +43,7 @@ namespace alert
             comPort = txtCOM.Text;
             settings.areas = selectedAreas;
             settings.port = comPort;
-            settings.saveSettings();
+            //settings.saveSettings();
         }
     }
 }
