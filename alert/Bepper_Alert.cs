@@ -22,6 +22,9 @@ namespace alert
             this.ShowInTaskbar = false;
 
             ContextMenu notifyMenu = new System.Windows.Forms.ContextMenu();
+#if DEBUG
+            notifyMenu.MenuItems.Add("DUMMY", new EventHandler(notifyMenu_dummy));
+#endif
             notifyMenu.MenuItems.Add("הגדרות", new EventHandler(notifyMenu_Settings));
             notifyMenu.MenuItems.Add("יציאה", new EventHandler(notifyMenu_exit));
             notifyIcon1.ContextMenu = notifyMenu;
@@ -49,6 +52,11 @@ namespace alert
         {
             Settings_Form Form = new Settings_Form();
             Form.ShowDialog();
+        }
+
+        private void notifyMenu_dummy(object sender, EventArgs e)
+        {
+            OnPagerMessageReceived(new BMGR.Daemon.PagerMessage("fdhgjkdfhjkghdfjk77klfdjhgkldfjhgk"));
         }
 
         private void button1_Click(object sender, EventArgs e)
