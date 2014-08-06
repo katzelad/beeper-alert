@@ -29,19 +29,25 @@ namespace alert
             notifyMenu.MenuItems.Add("יציאה", new EventHandler(notifyMenu_exit));
             notifyIcon1.ContextMenu = notifyMenu;
 
+            if (Settings.Instance.port != null)
+                listenToBeeper(Settings.Instance.port);
+
             Alert_Form Alert = new Alert_Form();
             Alert.Show();
 
         }
 
-        //Test
-        private void notifyMenu_sdfsdf(object sender, EventArgs e)
+        static BMGR.Daemon.SerialBeeper a;
+        public static void listenToBeeper(string port)
         {
-            //Alert_Form.arrAlert.Add(new Alert("ניב 150", 5));
-            //Alert_Form.arrAlert.Add(new Alert("dfkljdsf 150", 10));
+            if (a != null) {
+                a.Close();
+                a.Dispose();
+            }
+            a = new BMGR.Daemon.SerialBeeper(port, 4800, Parity.None, 8, StopBits.One, 1);
+            a.Open();
+            a.OnPagerMessageReceived += new BMGR.Daemon.SerialBeeper.PagerMessageReceived(OnPagerMessageReceived);
         }
-
-        
 
         private void notifyMenu_exit(object sender, EventArgs e)
         {
@@ -56,39 +62,22 @@ namespace alert
 
         private void notifyMenu_dummy(object sender, EventArgs e)
         {
-            OnPagerMessageReceivedDUMMY("fk311kk");
+            OnPagerStringReceived("fk311kk");
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            BMGR.Daemon.SerialBeeper a = new BMGR.Daemon.SerialBeeper(Settings.Instance.port, 4800, Parity.None, 8, StopBits.One, 1);
-            a.Open();
-            a.OnPagerMessageReceived += new BMGR.Daemon.SerialBeeper.PagerMessageReceived(OnPagerMessageReceived);
+
         }
 
-        void OnPagerMessageReceived(BMGR.Daemon.PagerMessage nan)
+        static void OnPagerMessageReceived(BMGR.Daemon.PagerMessage nan)
         {
-            
-            //extract id from area
-            int areaID = Int32.Parse(Regex.Match(nan.Text, @"\d+").Value);
 
-            foreach (Alert al in Settings.Instance.alerts)
-            {
-                if (al.ID == areaID)
-                {
-                    Alert_Form.arrAlert.Add(new Alert(al));
-                }
-            }
+            OnPagerStringReceived(nan.Text);
 
-            if (Settings.Instance.myAlert.ID == areaID)
-            {
-                Alert_Form.arrAlert.Add(new Alert(Settings.Instance.myAlert));
-            }
-
-                    
         }
 
-        void OnPagerMessageReceivedDUMMY(string nan)
+        static void OnPagerStringReceived(string nan)
         {
 
             //extract id from area
@@ -112,7 +101,7 @@ namespace alert
 
         private void Bepper_Alert_Load(object sender, EventArgs e)
         {
-            
+
         }
     }
 }
