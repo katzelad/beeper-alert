@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Media;
 
 namespace alert
 {
@@ -27,18 +28,31 @@ namespace alert
             new CLocation().GetLocationEvent();
         }
 
+        SoundPlayer player = new SoundPlayer("../../צבע אדום WAV.wav");
+        bool isPlaying = false;
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (arrAlert.Count == 0)
             {
                 this.WindowState = FormWindowState.Minimized;
                 this.ShowInTaskbar = false;
+                if (isPlaying)
+                {
+                    player.Stop();
+                    isPlaying = false;
+                }
             }
             else
-            {                
+            {
                 this.WindowState = FormWindowState.Normal;
                 this.ShowInTaskbar = true;
                 listBox1.DataSource = arrAlert;
+                if (!isPlaying)
+                {
+                    player.Play();
+                    isPlaying = true;
+                }
 
                 arrAlert = arrAlert.Where(a => a.TTL != 0).ToList<Alert>();
 
