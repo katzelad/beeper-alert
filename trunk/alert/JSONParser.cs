@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Json;
 using System.IO;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml.Spreadsheet;
 
 namespace alert
 {
@@ -90,14 +87,14 @@ namespace alert
             MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(File.ReadAllText(jsonFileName)));
             data = (RootObject)new DataContractJsonSerializer(typeof(RootObject)).ReadObject(stream);
 
-            SpreadsheetDocument table = SpreadsheetDocument.Open(tableFileName, false);
-            Func<Row, int, string> getCell = (row, col) => row.Elements<Cell>().ElementAt<Cell>(col).CellValue.Text;
-            zoneData = table.WorkbookPart.WorksheetParts.First().Worksheet.Elements<SheetData>().First().Elements<Row>().Skip(1)
-                .ToDictionary(
-                    row => getCell(row, 4),
-                    row => new Alert(getCell(row, 5), int.Parse(getCell(row, 10)))
-                );
-            table.Close();
+            zoneData = File.ReadAllLines(tableFileName, Encoding.GetEncoding("iso-8859-8"))
+                .Skip(3)
+                .Select(line => line.Split(','))
+                .ToDictionary(row => row[4], row => new Alert(row[5], int.Parse(row[10])));
+
+            foreach (Alert a in zoneData.Values)
+                if (a.Name[0] == '"' && a.Name[a.Name.Length - 1] == '"')
+                    a.Name = a.Name.Substring(1, a.Name.Length - 2);
 
         }
 

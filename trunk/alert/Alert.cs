@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace alert
 {
     public class Alert
     {
-        static char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         public Alert(string iName,int iTTL)
         {
             Name = iName;
             TTL = iTTL;
-            ID = int.Parse(new string(iName.Skip(iName.LastIndexOfAny(digits)).ToArray()));
+            ID = int.Parse(Regex.Match(iName, @"\d+").Value);
         }
-        public int ID { get; set; }
-        public string Name { get; set; }
-        public int TTL { get; set; }
+        public int ID;
+        public string Name;
+        public int TTL;
     }
 }
