@@ -9,14 +9,29 @@ namespace alert
 {
     public class Alert
     {
-        public Alert(string iName,int iTTL)
+
+        public Alert(string iName, int iTTL)
         {
             Name = iName;
             TTL = iTTL;
             ID = int.Parse(Regex.Match(iName, @"\d+").Value);
         }
+
+        public Alert(Alert other)
+        {
+            Name = other.Name;
+            TTL = other.TTL;
+            ID = other.ID;
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
         public int ID;
         public string Name;
         public int TTL;
+
     }
 }

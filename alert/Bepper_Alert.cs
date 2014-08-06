@@ -77,13 +77,13 @@ namespace alert
             {
                 if (al.ID == areaID)
                 {
-                    Alert_Form.arrAlert.Add(al);
+                    Alert_Form.arrAlert.Add(new Alert(al));
                 }
             }
 
             if (Settings.Instance.myAlert.ID == areaID)
             {
-                Alert_Form.arrAlert.Add(Settings.Instance.myAlert);
+                Alert_Form.arrAlert.Add(new Alert(Settings.Instance.myAlert));
             }
 
                     
@@ -100,13 +100,13 @@ namespace alert
             {
                 if (al.ID == areaID)
                 {
-                    Alert_Form.arrAlert.Add(al);
+                    Alert_Form.arrAlert.Add(new Alert(al));
                 }
             }
 
             if (Settings.Instance.myAlert != null && Settings.Instance.myAlert.ID == areaID)
             {
-                Alert_Form.arrAlert.Add(Settings.Instance.myAlert);
+                Alert_Form.arrAlert.Add(new Alert(Settings.Instance.myAlert));
             }
 
 
