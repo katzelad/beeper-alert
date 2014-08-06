@@ -4,12 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Settings
+
+namespace alert
 {
- 
+public class Settings
+{ 
    private static Settings instance;
 
    public string[] areas { get; set; }
+
+   public List<Alert> alerts { get; set; }
    public string port { get; set; }
 
    private Settings() { }
@@ -49,4 +53,5 @@ public class Settings
 
     }
    
+}
 }
