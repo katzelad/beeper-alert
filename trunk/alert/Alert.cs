@@ -8,7 +8,7 @@ namespace alert
 {
     public class Alert
     {
-        static const char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        static char[] digits = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         public Alert(string iName,int iTTL)
         {
             Name = iName;

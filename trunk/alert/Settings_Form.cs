@@ -13,7 +13,7 @@ namespace alert
     public partial class Settings_Form : Form
     {
         private JSONParser JSONdata = new JSONParser("../../MIGUN_GROUPS.json", "../../בסיס נתונים התרעה.xlsx");
-        private List<string> areas = new List<string>();
+        private string[] areas;
         private string[] selectedAreas;
         private string comPort;
         public static Settings settings = Settings.Instance;
