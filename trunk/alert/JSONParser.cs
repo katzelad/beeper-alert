@@ -153,11 +153,16 @@ namespace alert
         {
             Feature zone = data.features.Find(feature => feature.attributes.MIGUN_GROUP_NAME.Equals(currentZone));
             if (currentZone.Equals("") || !pointInPolygon(zone.geometry.rings[0].Select(p => new Point(p[0], p[1])).ToArray(), new Point(x, y)))
-                currentZone = data.features.Find(feature =>
+            {
+                Feature zoneOrNull = data.features.Find(feature =>
                     pointInPolygon(feature.geometry.rings[0].Select(p =>
                         new Point(p[0], p[1])
                     ).ToArray(), new Point(x, y))
-                ).attributes.MIGUN_GROUP_NAME;
+                );
+                if (zoneOrNull == null)
+                    return null;
+                currentZone = zoneOrNull.attributes.MIGUN_GROUP_NAME;
+            }
             return zoneData[currentZone];
         }
 

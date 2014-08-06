@@ -14,7 +14,6 @@ namespace alert
     class CLocation
     {
         private GeoCoordinateWatcher watcher;
-        private volatile Alert current;
 
         public void GetLocationEvent()
         {
@@ -30,8 +29,7 @@ namespace alert
         void watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
         {
             PrintPosition(e.Position.Location.Latitude, e.Position.Location.Longitude);
-            current = JSONParser.get().getPolygon(e.Position.Location.Latitude, e.Position.Location.Longitude);
-            Settings.Instance.myAlert = current;
+            Settings.Instance.myAlert = JSONParser.get().getPolygon(e.Position.Location.Latitude, e.Position.Location.Longitude); ;
         }
 
         void PrintPosition(double Latitude, double Longitude)
