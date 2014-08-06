@@ -80,6 +80,7 @@ namespace alert
 
         RootObject data;
         Dictionary<string, Alert> zoneData;
+        Dictionary<int, Alert> zoneByID;
 
         public JSONParser(string jsonFileName, string tableFileName)
         {
@@ -96,11 +97,18 @@ namespace alert
                 if (a.Name[0] == '"' && a.Name[a.Name.Length - 1] == '"')
                     a.Name = a.Name.Substring(1, a.Name.Length - 2);
 
+            zoneByID = zoneData.Values.ToDictionary(element => element.ID);
+
         }
 
         public string[] getGroupNames()
         {
             return zoneData.Select(element => element.Value.Name).ToArray();
+        }
+
+        public Alert getAlert(int id)
+        {
+            return zoneByID[id];
         }
 
         class Point
