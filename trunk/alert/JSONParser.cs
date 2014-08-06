@@ -82,7 +82,7 @@ namespace alert
         }
 
         RootObject data;
-        Dictionary<string, Tuple<string, int>> zoneData;
+        Dictionary<string, Alert> zoneData;
 
         public JSONParser(string jsonFileName, string tableFileName)
         {
@@ -95,15 +95,15 @@ namespace alert
             zoneData = table.WorkbookPart.WorksheetParts.First().Worksheet.Elements<SheetData>().First().Elements<Row>().Skip(1)
                 .ToDictionary(
                     row => getCell(row, 4),
-                    row => new Tuple<string, int>(getCell(row, 5), int.Parse(getCell(row, 10)))
+                    row => new Alert(getCell(row, 5), int.Parse(getCell(row, 10)))
                 );
             table.Close();
 
         }
 
-        public List<string> getGroupNames()
+        public string[] getGroupNames()
         {
-            return data.features.Select(element => element.attributes.MIGUN_GROUP_NAME).ToList();
+            return zoneData.Select(element => element.Value.Name).ToArray();
         }
 
         class Point
@@ -135,7 +135,7 @@ namespace alert
 
         string currentZone = "";
 
-        public Tuple<string, int> getPolygon(double x, double y)
+        public Alert getPolygon(double x, double y)
         {
             Feature zone = data.features.Find(feature => feature.attributes.MIGUN_GROUP_NAME.Equals(currentZone));
             if (currentZone.Equals("") || !pointInPolygon(zone.geometry.rings[0].Select(p => new Point(p[0], p[1])).ToArray(), new Point(x, y)))
