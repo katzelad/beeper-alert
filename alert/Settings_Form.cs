@@ -16,7 +16,6 @@ namespace alert
         private JSONParser JSONdata = JSONParser.get();
         private string[] areas;
         private string[] selectedAreas;
-        private string comPort;
         public static Settings settings = Settings.Instance;
 
         public Settings_Form()
@@ -33,6 +32,7 @@ namespace alert
                     chkAreaList.SetItemChecked(chkAreaList.FindStringExact(strArea), true);
                 }
             }
+            portCOM.Value = Settings.Instance.port == null ? 5 : Int32.Parse(Regex.Match(Settings.Instance.port, @"\d+").Value);
 
         }
 
@@ -44,9 +44,8 @@ namespace alert
         private void btnSave_Click(object sender, EventArgs e)
         {
             selectedAreas = chkAreaList.CheckedItems.OfType<string>().ToArray();
-            comPort = "COM" + portCOM.Value;
             settings.areas = selectedAreas;
-            settings.port = comPort;
+            settings.port = "COM" + portCOM.Value;
             settings.alerts = new List<Alert>();
 
             //create selected areas list 
@@ -62,10 +61,12 @@ namespace alert
                 settings.alerts.Add(newAlert);
             }
             //settings.saveSettings();
-            this.Close();
 
-            if (!comPort.Equals(""))
-                Bepper_Alert.listenToBeeper(comPort);
+            if (portCOM.Value != 0)
+                if (!Bepper_Alert.listenToBeeper(settings.port))
+                    return;
+
+            this.Close();
         }
     }
 }

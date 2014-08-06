@@ -129,7 +129,7 @@
             this.Controls.Add(this.panel1);
             this.Name = "Settings_Form";
             this.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.Text = "Settings_Form";
+            this.Text = "Very Emportant Notifications";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.portCOM)).EndInit();

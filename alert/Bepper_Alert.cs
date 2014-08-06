@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BMGR.Daemon;
 
 namespace alert
 {
@@ -37,16 +38,25 @@ namespace alert
 
         }
 
-        static BMGR.Daemon.SerialBeeper a;
-        public static void listenToBeeper(string port)
+        static SerialBeeper a;
+        public static bool listenToBeeper(string port)
         {
-            if (a != null) {
+            if (a != null)
+            {
                 a.Close();
                 a.Dispose();
             }
-            a = new BMGR.Daemon.SerialBeeper(port, 4800, Parity.None, 8, StopBits.One, 1);
-            a.Open();
-            a.OnPagerMessageReceived += new BMGR.Daemon.SerialBeeper.PagerMessageReceived(OnPagerMessageReceived);
+            try
+            {
+                a = new SerialBeeper(port, 4800, Parity.None, 8, StopBits.One, 1);
+                a.Open();
+                a.OnPagerMessageReceived += new SerialBeeper.PagerMessageReceived(OnPagerMessageReceived);
+            }
+            catch (System.IO.IOException)
+            {
+                return false;
+            }
+            return true;
         }
 
         private void notifyMenu_exit(object sender, EventArgs e)
@@ -70,7 +80,7 @@ namespace alert
 
         }
 
-        static void OnPagerMessageReceived(BMGR.Daemon.PagerMessage nan)
+        static void OnPagerMessageReceived(PagerMessage nan)
         {
 
             OnPagerStringReceived(nan.Text);
