@@ -14,6 +14,8 @@ public class Settings
    public string[] areas { get; set; }
 
    public List<Alert> alerts { get; set; }
+
+   public Alert myAlert { get; set; }
    public string port { get; set; }
 
    private Settings() { }
