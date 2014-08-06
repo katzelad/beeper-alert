@@ -24,7 +24,7 @@ namespace alert
             InitializeComponent();
             areas = JSONdata.getGroupNames();
             chkAreaList.DataSource = areas;
-            //settings.loadSettings();
+            // settings.loadSettings();
 
             if (settings.areas != null)
             {

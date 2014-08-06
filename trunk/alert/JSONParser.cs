@@ -89,9 +89,8 @@ namespace alert
             data = (RootObject)new DataContractJsonSerializer(typeof(RootObject)).ReadObject(stream);
 
             zoneData = File.ReadAllLines("../../בסיס נתונים התרעה.csv", Encoding.GetEncoding("iso-8859-8"))
-                .Skip(3)
                 .Select(line => line.Split(','))
-                .ToDictionary(row => row[4], row => new Alert(row[5], int.Parse(row[10])));
+                .ToDictionary(row => row[1], row => new Alert(row[2], int.Parse(row[9])));
 
             foreach (Alert a in zoneData.Values)
                 if (a.Name[0] == '"' && a.Name[a.Name.Length - 1] == '"')
