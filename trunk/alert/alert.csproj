@@ -76,6 +76,7 @@
     <Compile Include="Bepper_Alert.Designer.cs">
       <DependentUpon>Bepper_Alert.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
