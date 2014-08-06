@@ -50,7 +50,7 @@ namespace alert
 
         private void button1_Click(object sender, EventArgs e)
         {
-            BMGR.Daemon.SerialBeeper a = new BMGR.Daemon.SerialBeeper("COM5", 4800, Parity.None, 8, StopBits.One, 1);
+            BMGR.Daemon.SerialBeeper a = new BMGR.Daemon.SerialBeeper(Settings.Instance.port, 4800, Parity.None, 8, StopBits.One, 1);
             a.Open();
             a.OnPagerMessageReceived += new BMGR.Daemon.SerialBeeper.PagerMessageReceived(OnPagerMessageReceived);
         }
