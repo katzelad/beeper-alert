@@ -82,13 +82,13 @@ namespace alert
         Dictionary<string, Alert> zoneData;
         Dictionary<int, Alert> zoneByID;
 
-        public JSONParser(string jsonFileName, string tableFileName)
+        private JSONParser()
         {
 
-            MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(File.ReadAllText(jsonFileName)));
+            MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(File.ReadAllText("../../MIGUN_GROUPS.json")));
             data = (RootObject)new DataContractJsonSerializer(typeof(RootObject)).ReadObject(stream);
 
-            zoneData = File.ReadAllLines(tableFileName, Encoding.GetEncoding("iso-8859-8"))
+            zoneData = File.ReadAllLines("../../בסיס נתונים התרעה.csv", Encoding.GetEncoding("iso-8859-8"))
                 .Skip(3)
                 .Select(line => line.Split(','))
                 .ToDictionary(row => row[4], row => new Alert(row[5], int.Parse(row[10])));
@@ -99,6 +99,15 @@ namespace alert
 
             zoneByID = zoneData.Values.ToDictionary(element => element.ID);
 
+        }
+
+        static JSONParser instance;
+
+        public static JSONParser get()
+        {
+            if (instance == null)
+                instance = new JSONParser();
+            return instance;
         }
 
         public string[] getGroupNames()
