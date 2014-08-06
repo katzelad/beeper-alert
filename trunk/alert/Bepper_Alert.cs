@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO.Ports;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -33,9 +34,11 @@ namespace alert
         //Test
         private void notifyMenu_sdfsdf(object sender, EventArgs e)
         {
-            Alert_Form.arrAlert.Add(new Alert("ניב 150", 5));
-            Alert_Form.arrAlert.Add(new Alert("dfkljdsf 150", 10));
+            //Alert_Form.arrAlert.Add(new Alert("ניב 150", 5));
+            //Alert_Form.arrAlert.Add(new Alert("dfkljdsf 150", 10));
         }
+
+        
 
         private void notifyMenu_exit(object sender, EventArgs e)
         {
@@ -57,9 +60,25 @@ namespace alert
 
         void OnPagerMessageReceived(BMGR.Daemon.PagerMessage nan)
         {
-            label1.Text = nan.AddressSlot;
-            //new alert
+            //label1.Text = nan.Text;
             
+            //extract id from area
+            int areaID = Int32.Parse(Regex.Match(nan.Text, @"\d+").Value);
+
+            foreach (Alert al in Settings.Instance.alerts)
+            {
+                if (al.ID == areaID)
+                {
+                    Alert_Form.arrAlert.Add(al);
+                }
+            }
+
+            if (Settings.Instance.myAlert.ID == areaID)
+            {
+                Alert_Form.arrAlert.Add(Settings.Instance.myAlert);
+            }
+
+                    
         }
 
         private void Bepper_Alert_Load(object sender, EventArgs e)
