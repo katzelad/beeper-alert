@@ -13,10 +13,10 @@ public class Settings
 
    public string[] areas { get; set; }
 
-   public List<Alert> alerts { get; set; }
+   public List<Alert> alerts = new List<Alert>();
 
-   public Alert myAlert { get; set; }
-   public string port { get; set; }
+   public Alert myAlert;
+   public string port = "COM5";
 
    private Settings() { }
 

@@ -56,7 +56,7 @@ namespace alert
 
         private void notifyMenu_dummy(object sender, EventArgs e)
         {
-            OnPagerMessageReceived(new BMGR.Daemon.PagerMessage("fdhgjkdfhjkghdfjk77klfdjhgkldfjhgk"));
+            OnPagerMessageReceivedDUMMY("fk77kk");
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -87,6 +87,29 @@ namespace alert
             }
 
                     
+        }
+
+        void OnPagerMessageReceivedDUMMY(string nan)
+        {
+            //label1.Text = nan.Text;
+
+            //extract id from area
+            int areaID = Int32.Parse(Regex.Match(nan, @"\d+").Value);
+
+            foreach (Alert al in Settings.Instance.alerts)
+            {
+                if (al.ID == areaID)
+                {
+                    Alert_Form.arrAlert.Add(al);
+                }
+            }
+
+            if (Settings.Instance.myAlert != null && Settings.Instance.myAlert.ID == areaID)
+            {
+                Alert_Form.arrAlert.Add(Settings.Instance.myAlert);
+            }
+
+
         }
 
         private void Bepper_Alert_Load(object sender, EventArgs e)
