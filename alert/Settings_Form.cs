@@ -44,7 +44,7 @@ namespace alert
         private void btnSave_Click(object sender, EventArgs e)
         {
             selectedAreas = chkAreaList.CheckedItems.OfType<string>().ToArray();
-            comPort = txtCOM.Text;
+            comPort = "COM" + portCOM.Value;
             settings.areas = selectedAreas;
             settings.port = comPort;
             settings.alerts = new List<Alert>();
@@ -63,6 +63,9 @@ namespace alert
             }
             //settings.saveSettings();
             this.Close();
+
+            if (!comPort.Equals(""))
+                Bepper_Alert.listenToBeeper(comPort);
         }
     }
 }

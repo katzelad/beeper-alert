@@ -16,7 +16,7 @@ public class Settings
    public List<Alert> alerts = new List<Alert>();
 
    public Alert myAlert;
-   public string port = "COM5";
+   public string port;
 
    private Settings() { }
 
