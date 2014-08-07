@@ -23,6 +23,9 @@ namespace alert
             this.ShowInTaskbar = false;
 
             ContextMenu notifyMenu = new System.Windows.Forms.ContextMenu();
+
+            Settings.Instance.loadSettings();
+
 #if DEBUG
             notifyMenu.MenuItems.Add("DUMMY", new EventHandler(notifyMenu_dummy));
 #endif

@@ -35,12 +35,6 @@ namespace alert
             port.Items.AddRange(SerialPort.GetPortNames());
             if (port.Items.Count > 0)
                 port.SelectedIndex = 0;
-            // portCOM.Value = Settings.Instance.port == null ? 5 : Int32.Parse(Regex.Match(Settings.Instance.port, @"\d+").Value);
-
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
 
         }
 
@@ -48,8 +42,7 @@ namespace alert
         {
             selectedAreas = chkAreaList.CheckedItems.OfType<string>().ToArray();
             settings.areas = selectedAreas;
-            // settings.port = "COM" + portCOM.Value;
-            settings.port = port.SelectedItem.ToString();
+            settings.port = port.Text;
             settings.alerts = new List<Alert>();
 
             //create selected areas list 
@@ -67,7 +60,10 @@ namespace alert
             settings.saveSettings();
 
             if (!Bepper_Alert.listenToBeeper(settings.port))
+            {
+                MessageBox.Show("פורט COM שגוי.", "VEN", 0, MessageBoxIcon.Error, 0, MessageBoxOptions.RtlReading);
                 return;
+            }
 
             this.Close();
         }
