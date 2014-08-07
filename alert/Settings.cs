@@ -75,10 +75,12 @@ public class Settings
         }*/
 
         StreamReader sr = new StreamReader("../../properties.txt");
-
-        port = sr.ReadLine();
-        if (sr.ReadLine() != null)
+        if (!sr.EndOfStream)
+        {
+            port = sr.ReadLine();
             areas = sr.ReadLine().Split(',');
+        }
+
     }
    
   }
