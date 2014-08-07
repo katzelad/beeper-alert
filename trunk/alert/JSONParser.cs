@@ -85,7 +85,7 @@ namespace alert
         private JSONParser()
         {
 
-            MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(File.ReadAllText("../../MIGUN_GROUPS.json")));
+            MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(File.ReadAllText("../../index.json")));
             data = (RootObject)new DataContractJsonSerializer(typeof(RootObject)).ReadObject(stream);
 
             zoneData = File.ReadAllLines("../../בסיס נתונים התרעה.csv", Encoding.GetEncoding("iso-8859-8"))
