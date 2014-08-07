@@ -39,7 +39,7 @@ namespace alert
 
         static void PrintPosition(double Latitude, double Longitude)
         {
-            System.Windows.Forms.MessageBox.Show("Latitude: " + Latitude + ", Longitude " + Longitude);
+            MessageBox.Show("Latitude: " + Latitude + ", Longitude " + Longitude);
         }
     }
 

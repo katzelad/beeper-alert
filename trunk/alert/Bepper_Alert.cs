@@ -52,7 +52,7 @@ namespace alert
                 a.Open();
                 a.OnPagerMessageReceived += new SerialBeeper.PagerMessageReceived(OnPagerMessageReceived);
             }
-            catch (System.IO.IOException)
+            catch (SystemException)
             {
                 return false;
             }

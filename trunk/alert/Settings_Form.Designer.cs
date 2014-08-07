@@ -35,10 +35,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.portCOM = new System.Windows.Forms.NumericUpDown();
+            this.port = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.portCOM)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -102,18 +101,14 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // portCOM
+            // port
             // 
-            this.portCOM.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-            this.portCOM.Location = new System.Drawing.Point(236, 265);
-            this.portCOM.Name = "portCOM";
-            this.portCOM.Size = new System.Drawing.Size(43, 29);
-            this.portCOM.TabIndex = 6;
-            this.portCOM.Value = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
+            this.port.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.port.FormattingEnabled = true;
+            this.port.Location = new System.Drawing.Point(168, 265);
+            this.port.Name = "port";
+            this.port.Size = new System.Drawing.Size(121, 21);
+            this.port.TabIndex = 6;
             // 
             // Settings_Form
             // 
@@ -121,7 +116,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(406, 460);
-            this.Controls.Add(this.portCOM);
+            this.Controls.Add(this.port);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -132,7 +127,6 @@
             this.Text = "Very Emportant Notifications";
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.portCOM)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -146,6 +140,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.NumericUpDown portCOM;
+        private System.Windows.Forms.ComboBox port;
     }
 }

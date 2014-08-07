@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO.Ports;
 
 namespace alert
 {
@@ -32,7 +33,10 @@ namespace alert
                     chkAreaList.SetItemChecked(chkAreaList.FindStringExact(strArea), true);
                 }
             }
-            portCOM.Value = Settings.Instance.port == null ? 5 : Int32.Parse(Regex.Match(Settings.Instance.port, @"\d+").Value);
+            port.Items.AddRange(SerialPort.GetPortNames());
+            if (port.Items.Count > 0)
+                port.SelectedIndex = 0;
+            // portCOM.Value = Settings.Instance.port == null ? 5 : Int32.Parse(Regex.Match(Settings.Instance.port, @"\d+").Value);
 
         }
 
@@ -45,7 +49,8 @@ namespace alert
         {
             selectedAreas = chkAreaList.CheckedItems.OfType<string>().ToArray();
             settings.areas = selectedAreas;
-            settings.port = "COM" + portCOM.Value;
+            // settings.port = "COM" + portCOM.Value;
+            settings.port = port.SelectedItem.ToString();
             settings.alerts = new List<Alert>();
 
             //create selected areas list 
@@ -62,11 +67,11 @@ namespace alert
             }
             //settings.saveSettings();
 
-            if (portCOM.Value != 0)
-                if (!Bepper_Alert.listenToBeeper(settings.port))
-                    return;
+            if (!Bepper_Alert.listenToBeeper(settings.port))
+                return;
 
             this.Close();
         }
+
     }
 }
