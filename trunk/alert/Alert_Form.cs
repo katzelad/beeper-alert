@@ -19,6 +19,7 @@ namespace alert
         {
             InitializeComponent();
             arrAlert = new List<Alert>();
+            Settings.Instance.loadSettings();
         }
 
         private void Alert_Form_Load(object sender, EventArgs e)
