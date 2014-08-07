@@ -34,25 +34,22 @@ public class Settings
 
     public void saveSettings()
     {
-        var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-
         string areasString = String.Join(",", areas);
 
-        localSettings.Values["port"] = port;
-        localSettings.Values["areas"] = areasString;
-
+        Properties.Settings.Default.Port = port;
+        Properties.Settings.Default.Areas = areasString;
    }
 
     public void loadSettings()
     {
-        var localSettings = Windows.Storage.ApplicationData.Current.LocalSettings;
-
-        Object portVal = localSettings.Values["port"];
-        port = portVal.ToString();
-        Object areasVal = localSettings.Values["areas"];
-        string areasString = areasVal.ToString();
-        areas = areasString.Split(',');
-
+        if (Properties.Settings.Default.Port != "")
+        {
+            port = Properties.Settings.Default.Port;
+        }
+        if (Properties.Settings.Default.Areas.Length > 1)
+        {
+            areas = Properties.Settings.Default.Areas.Split(',');
+        }
     }
    
   }

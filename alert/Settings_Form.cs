@@ -24,9 +24,8 @@ namespace alert
             InitializeComponent();
             areas = JSONdata.getGroupNames();
             chkAreaList.DataSource = areas;
-            // settings.loadSettings();
 
-            if (settings.areas != null)
+            if (settings.areas != null )
             {
                 foreach (string strArea in settings.areas)
                 {
@@ -65,7 +64,7 @@ namespace alert
                 //add to alerts list in settings
                 settings.alerts.Add(newAlert);
             }
-            //settings.saveSettings();
+            settings.saveSettings();
 
             if (!Bepper_Alert.listenToBeeper(settings.port))
                 return;
