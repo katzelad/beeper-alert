@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,18 +39,46 @@ public class Settings
 
         Properties.Settings.Default.Port = port;
         Properties.Settings.Default.Areas = areasString;
+
+        try
+        {
+            StreamWriter sw = new StreamWriter("../../properties.txt");
+            
+            //clear file
+            sw.Write("");
+            //Write port
+            sw.WriteLine(port);
+            //Write areas
+            sw.WriteLine(areasString);
+            //Close the file
+            sw.Close();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine("Exception: " + e.Message);
+        }
+        finally
+        {
+            Console.WriteLine("Executing finally block.");
+        }
    }
 
     public void loadSettings()
     {
-        if (Properties.Settings.Default.Port != "")
+        /*if (Properties.Settings.Default.Port != "")
         {
             port = Properties.Settings.Default.Port;
         }
         if (Properties.Settings.Default.Areas.Length > 1)
         {
             areas = Properties.Settings.Default.Areas.Split(',');
-        }
+        }*/
+
+        StreamReader sr = new StreamReader("../../properties.txt");
+
+        port = sr.ReadLine();
+        if (sr.ReadLine() != null)
+            areas = sr.ReadLine().Split(',');
     }
    
   }
