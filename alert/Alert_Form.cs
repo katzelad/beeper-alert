@@ -50,7 +50,7 @@ namespace alert
                 listBox1.DataSource = arrAlert;
                 if (!isPlaying)
                 {
-                    player.Play();
+                    player.PlayLooping();
                     isPlaying = true;
                 }
 

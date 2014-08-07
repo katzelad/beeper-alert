@@ -88,7 +88,13 @@ namespace alert
             MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(File.ReadAllText("../../index.json")));
             data = (RootObject)new DataContractJsonSerializer(typeof(RootObject)).ReadObject(stream);
 
-            zoneData = File.ReadAllLines("../../בסיס נתונים התרעה.csv", Encoding.GetEncoding("iso-8859-8"))
+#if DEBUG
+            string zonesFileName = "../../בסיס נתונים התרעה - DEBUG.csv";
+#else
+            string zonesFileName = "../../בסיס נתונים התרעה.csv";
+#endif
+
+            zoneData = File.ReadAllLines(zonesFileName, Encoding.GetEncoding("iso-8859-8"))
                 .Select(line => line.Split(','))
                 .ToDictionary(row => row[1], row => new Alert(row[2], int.Parse(row[9])));
 
@@ -151,11 +157,11 @@ namespace alert
         public Alert getPolygon(double x, double y)
         {
             Feature zone = data.features.Find(feature => feature.attributes.MIGUN_GROUP_NAME.Equals(currentZone));
-            if (currentZone.Equals("") || !pointInPolygon(zone.geometry.rings[0].Select(p => new Point(p[0], p[1])).ToArray(), new Point(x, y)))
+            if (currentZone.Equals("") || !pointInPolygon(zone.geometry.rings[0].Select(p => new Point(p[1], p[0])).ToArray(), new Point(x, y)))
             {
                 Feature zoneOrNull = data.features.Find(feature =>
                     pointInPolygon(feature.geometry.rings[0].Select(p =>
-                        new Point(p[0], p[1])
+                        new Point(p[1], p[0])
                     ).ToArray(), new Point(x, y))
                 );
                 if (zoneOrNull == null)

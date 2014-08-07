@@ -22,19 +22,24 @@ namespace alert
             bool started = this.watcher.TryStart(false, TimeSpan.FromMilliseconds(2000));
             if (!started)
             {
-                Console.WriteLine("GeoCoordinateWatcher timed out on start.");
+                System.Windows.Forms.MessageBox.Show("GeoCoordinateWatcher timed out on start.");
             }
         }
 
-        void watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        static void watcher_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
         {
-            PrintPosition(e.Position.Location.Latitude, e.Position.Location.Longitude);
-            Settings.Instance.myAlert = JSONParser.get().getPolygon(e.Position.Location.Latitude, e.Position.Location.Longitude); ;
+            changePosition(e.Position.Location.Latitude, e.Position.Location.Longitude);
         }
 
-        void PrintPosition(double Latitude, double Longitude)
+        public static void changePosition(double x, double y)
         {
-            Console.WriteLine("Latitude: {0}, Longitude {1}", Latitude, Longitude);
+            // PrintPosition(x, y);
+            Settings.Instance.myAlert = JSONParser.get().getPolygon(x, y);
+        }
+
+        static void PrintPosition(double Latitude, double Longitude)
+        {
+            System.Windows.Forms.MessageBox.Show("Latitude: " + Latitude + ", Longitude " + Longitude);
         }
     }
 

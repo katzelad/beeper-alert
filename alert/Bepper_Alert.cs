@@ -72,7 +72,14 @@ namespace alert
 
         private void notifyMenu_dummy(object sender, EventArgs e)
         {
-            OnPagerStringReceived("fk311kk");
+            OnPagerStringReceived("fk155kk");
+            OnPagerStringReceived("fk160kk");
+            OnPagerStringReceived("fk156kk");
+            OnPagerStringReceived("fk157kk");
+            OnPagerStringReceived("fk159kk");
+            OnPagerStringReceived("fk161kk");
+            OnPagerStringReceived("fk162kk");
+            OnPagerStringReceived("fk178kk");
         }
 
         private void button1_Click(object sender, EventArgs e)
